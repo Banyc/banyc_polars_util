@@ -21,6 +21,16 @@ pub fn read_df_file(path: impl AsRef<Path>) -> anyhow::Result<LazyFrame> {
         "ndjson" | "jsonl" => LazyJsonLineReader::new(&path)
             .with_infer_schema_length(None)
             .finish()?,
+        "hdvb" => {
+            let file = std::fs::File::options().read(true).open(&path)?;
+            let buf_file = std::io::BufReader::new(file);
+            hdv::io::polars::hdv_bin_polars_read(buf_file)?.lazy()
+        }
+        "hdvt" => {
+            let file = std::fs::File::options().read(true).open(&path)?;
+            let buf_file = std::io::BufReader::new(file);
+            hdv::io::polars::hdv_text_polars_read(buf_file)?.lazy()
+        }
         _ => anyhow::bail!(
             "Unknown extension `{}` at the name of the file `{}`",
             extension.to_string_lossy(),
