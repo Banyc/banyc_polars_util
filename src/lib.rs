@@ -1,5 +1,9 @@
 use std::path::Path;
 
+use hdv::io::{
+    polars::{hdv_bin_polars_write, hdv_text_polars_write},
+    text::HdvTextWriterOptions,
+};
 use polars::prelude::*;
 
 pub fn read_df_file(path: impl AsRef<Path>) -> anyhow::Result<LazyFrame> {
@@ -59,6 +63,13 @@ pub fn write_df_output(mut df: DataFrame, path: impl AsRef<Path>) -> anyhow::Res
                 "No `JsonLineWriter` available to write `{}`",
                 path.as_ref().to_string_lossy()
             );
+        }
+        "hdvb" => hdv_bin_polars_write(output, &df)?,
+        "hdvt" => {
+            let options = HdvTextWriterOptions {
+                is_csv_header: false,
+            };
+            hdv_text_polars_write(output, &df, options)?
         }
         _ => anyhow::bail!(
             "Unknown extension `{}` at the name of the file `{}`",
