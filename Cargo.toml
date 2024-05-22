@@ -1,0 +1,8 @@
+[package]
+name = "banyc_polars_util"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anyhow = "1"
+polars = { version = "0.40", features = ["json", "lazy"] }
