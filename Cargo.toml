@@ -5,5 +5,5 @@ edition = "2021"
 
 [dependencies]
 anyhow = "1"
-hdv = { git = "https://github.com/Banyc/hdv.git", tag = "v0.0.3", features = ["polars"] }
+hdv = { git = "https://github.com/Banyc/hdv.git", tag = "v0.0.4", features = ["polars"] }
 polars = { version = "0.40", features = ["json", "lazy"] }

@@ -399,7 +399,7 @@ dependencies = [
 [[package]]
 name = "hdv"
 version = "0.1.0"
-source = "git+https://github.com/Banyc/hdv.git?tag=v0.0.3#cdad8b7e41e7e952af14cebf0f8c50a969b7bea3"
+source = "git+https://github.com/Banyc/hdv.git?tag=v0.0.4#5ffba2eed48a230a06217218056ef6723019f33d"
 dependencies = [
  "bincode",
  "integer-encoding",
